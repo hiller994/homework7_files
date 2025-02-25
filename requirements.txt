@@ -1,4 +1,4 @@
 selene==2.0.0rc9
 pytest
-selenium~=4.29.0
-webdriver-manager~=4.0.2
+pypdf
+openpyxl
