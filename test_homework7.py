@@ -11,6 +11,7 @@ def test_check_pdf():
     with ZipFile(os.path.join(FILE_DIV, "new_zip2025.zip"), 'r') as pdf_zip:
         reader_pdf = PdfReader(pdf_zip.open("tmp/Python Testing with Pytest (Brian Okken).pdf"))
         assert len(reader_pdf.pages) == 256  # проверяем кол-во страниц
+        assert 'Simple, Rapid, Effective, and Scalable' in reader_pdf.pages[1] ##проверка, что данный текст находится на 1ой страницe
         print("Проверка PDF прошла")
 
 def test_check_xlsx():
@@ -22,7 +23,8 @@ def test_check_xlsx():
 
 def test_check_csv():
     with ZipFile(os.path.join(FILE_DIV, "new_zip2025.zip"), 'r') as csv_zip:
-        reader_csv = csv.reader(codecs.iterdecode(csv_zip.open("tmp/csvtest.csv"), 'utf-8'))
+        reader_csv = csv.reader(codecs.iterdecode(csv_zip.open("tmp/csvtest.csv"), 'utf-8'), delimiter=';')
         rows = list(reader_csv)
+        assert any('Andrey' in row for row in rows) #ищем текст Андрей по всем строка
         assert len(rows) == 4 #проверяет количество строк
         print("Проверка csv прошла")
